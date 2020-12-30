@@ -97,7 +97,7 @@ $email = $_POST["email"];
 $message = $_POST["message"];
 $subject = $_POST["subject"];
 
-$to = 'yousboud@hotmail.com';
+$to = 'support@mctoman.com';
 
 $headers = "From: ".$name."\r\n";
 $send = mail($to, $subject, $message, $headers);
