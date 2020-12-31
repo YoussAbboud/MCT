@@ -1,3 +1,5 @@
+<?php require 'message.php'; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,11 +21,11 @@
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300">
     <!-- Google web font "Open Sans" -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css"> <!-- https://getbootstrap.com/ -->
+    <link rel="stylesheet" href="css/bootstrap.min.css"> <!-- https://getbootstrap.com/ -->
     <link rel="stylesheet" href="fontawesome/css/fontawesome-all.min.css"> <!-- https://fontawesome.com/ -->
     <link rel="stylesheet" type="text/css" href="slick/slick.css" />
     <link rel="stylesheet" type="text/css" href="slick/slick-theme.css" />
-    <link rel="stylesheet" href="/css/style.css"> <!-- css style -->
+    <link rel="stylesheet" href="css/style.css"> <!-- css style -->
 
 
     <style>
@@ -99,6 +101,7 @@ textarea:focus{
 
         #sub {
             width: 100%;
+            background-color: white;
         }
     </style>
 
@@ -106,7 +109,7 @@ textarea:focus{
 </head>
 
 
-<body style="background-color: rgb(29, 28, 28); padding-bottom: 200px;">
+<body style="background-image:url(img/bg-01.jpg)">
 
 
     <!-- Navigation-->
@@ -132,78 +135,82 @@ textarea:focus{
     </nav>
 
 
-    <?php 
-if(isset($_POST["submit"]))
-{
-if(isset($_POST["message"]) && isset($_POST["email"]) && isset($_POST["user"]) && isset($_POST["subject"]))
-{
-$name = $_POST["user"];
-$email = $_POST["email"];
-$message = $_POST["message"];
-$subject = $_POST["subject"];
-
-$to = 'yousboud@hotmail.com';
-
-$headers = " From: ".$name."\r\n";
-$send = mail($to, $subject, $message. $headers);
-
-if($send)
-{
-    echo "<script type='text/javascript'>alert('Thank You for Contacting our Support, will get to you shortly');</script>";
-
-mail($email,"Customer Support","Thank you For Contacting Customer Support, Will get to you shortly", "Customer Support at MCT OMAN");
-
-}
-else
-{
-?>
-    <span class="popuptext" id="myPopup">Try Again Later</span>
-    <?php
-}
-}
-}
-?>
+    
 
 
     <div class="container mx-auto">
 
         <div class="row text-center">
             <div class="col-12">
-                <h1 style="margin-top: 50px; margin-bottom: 50px;">Send Us an inquiry</h1>
+                <h1 style="margin-top: 100px; margin-bottom: 50px; font-weight:700">Careers</h1>
             </div>
         </div>
 
-        <div class="row" style="margin-bottom: 20px;">
+        <!-- Display submission status -->
+<?php if(!empty($statusMsg)){ ?>
+    <p><?php echo $statusMsg; ?></p>
+<?php } ?>
+ 
+<!-- Display contact form -->
+<form method="post" action="" enctype="multipart/form-data">
+<div class="row mx-auto">
+    <div class="col-lg-5">
+    <div class="form-group">
+        <input type="text" name="name" class="form-control"  placeholder="Name" required="">
+    </div>
+    </div>
+    <div class="col-lg-7">
+    <div class="form-group">
+        <input type="email" name="email" class="form-control"  placeholder="Email address" required="">
+    </div>
+    </div>
+    </div>
+    <div class="row mx-auto">
 
-
-            <div class="col-lg-12 col-md-2 ml-auto">
-
-                <form method="post" action="enquiry.php">
-                    <input style="margin-right: 20px;" type="text" name="user" id="input-name" placeholder="Name">
-                    <input type="email" name="email" id="input-email" placeholder="Email address">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <input type="text" name="subject" id="input-subject" placeholder="Subject" style="width: 300px;">
-            </div>
-
-            <div class="col-lg-12 col-md-6 mx-auto comment" style="margin-top: 20px;">
-                <textarea class="textinput" name="message" type="text" id="input-message" placeholder="Message"
-                    style="height: 300px"></textarea>
-            </div>
-
-
+    <div class="col-lg-12">
+    <div class="form-group">
+        <input type="text" name="subject" class="form-control"  placeholder="Subject" required="">
+    </div>
+    </div>
+    </div>
+    <div class="row mx-auto">
+        <div class="col-lg-12">
+    <div class="form-group">
+        <textarea name="message" class="form-control" placeholder="Write your message here" required=""></textarea>
+    </div>
         </div>
     </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-3 mx-auto">
-                <input id="sub" type="submit" name="submit" value="Submit" id="input-submit">
-            </div>
+    <div class="row mx-auto">
+        <div class="col-lg-2">
+            <p></p>
+        </div>
+        <div class="col-lg-8">
+            <p style="font-weight: 700;">Please add Resume file without any White Space</p>
+        </div>
+        <div class="col-lg-2">
+            <p></p>
         </div>
     </div>
+    <div class="row mx-auto">
+    <div class="col-lg-12">
+    <div class="form-group">
+        <input type="file" name="file" class="form-control" style="padding-bottom: 45px;">
+    </div>
+    </div>
+    </div>
 
+<div class="row ml-auto">
+<div class="col-lg-4">    
+<div class="submit" style="margin-bottom: 100px">
+        <input id="sub" type="submit" name="submit" class="btn" value="SEND MESSAGE">
+    </div>
+</div>
+</div>
+
+
+</form>
+    </div>
+    
     </form>
 
 
@@ -227,39 +234,19 @@ else
 
 
     <!-- load JS -->
-    <script src="/js/jquery.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 
-    <script src="/js/vegas.min.js"></script>
+    <script src="js/vegas.min.js"></script>
 
-    <script src="/js/wow.min.js"></script>
-    <script src="/js/smoothscroll.js"></script>
-    <script src="/js/main.js"></script>
+    <script src="js/wow.min.js"></script>
+    <script src="js/smoothscroll.js"></script>
+    <script src="js/main.js"></script>
     <script>
-        function setupFooter() {
-            var pageHeight = $('.tm-site-header-container').height() + $('footer').height() + 100;
-
-            var main = $('.tm-main-content');
-
-            if ($(window).height() < pageHeight) {
-                main.addClass('tm-footer-relative');
-            } else {
-                main.removeClass('tm-footer-relative');
-            }
-        }
-
+        
         /* DOM is ready
         ------------------------------------------------*/
-        $(function () {
-
-            setupFooter();
-
-            $(window).resize(function () {
-                setupFooter();
-            });
-
-            $('.tm-current-year').text(new Date().getFullYear()); // Update year in copyright           
-        });
+        
     </script>
 
 </body>
